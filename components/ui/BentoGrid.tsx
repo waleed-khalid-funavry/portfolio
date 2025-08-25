@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { IoCopyOutline } from "react-icons/io5";
-
-// Also install this npm i --save-dev @types/react-lottie
-import Lottie from "react-lottie";
-
 import { cn } from "@/lib/utils";
-
-
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import { BackgroundGradientAnimation } from "./GradientBg";
 import GridGlobe from "./GridGlobe";
-import animationData from "@/data/confetti.json";
 import MagicButton from "../MagicButton";
+import { Button } from "./MovingBorders";
+import { PinContainer } from "./Pin";
+import { TextGenerateEffect } from "./TextGenerateEffect";
+import { Spotlight } from "./Spotlight";
+import { CanvasRevealEffect } from "./CanvasRevealEffect";
+import { IoCopyOutline } from "react-icons/io5";
+import Image from "next/image";
 
 export const BentoGrid = ({
   className,
@@ -60,7 +60,6 @@ export const BentoGridItem = ({
   const defaultOptions = {
     loop: copied,
     autoplay: copied,
-    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -91,9 +90,11 @@ export const BentoGridItem = ({
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
         <div className="w-full h-full absolute">
           {img && (
-            <img
+            <Image
               src={img}
-              alt={img}
+              alt={typeof title === 'string' ? title : 'Image'}
+              width={400}
+              height={300}
               className={cn(imgClassName, "object-cover object-center ")}
             />
           )}
@@ -103,10 +104,11 @@ export const BentoGridItem = ({
             } `}
         >
           {spareImg && (
-            <img
+            <Image
               src={spareImg}
-              alt={spareImg}
-              //   width={220}
+              alt={typeof title === 'string' ? title : 'Image'}
+              width={400}
+              height={300}
               className="object-cover object-center w-full h-full"
             />
           )}
@@ -182,7 +184,7 @@ export const BentoGridItem = ({
                   }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
+                <div className="w-96 h-48 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg opacity-80"></div>
               </div>
 
               <MagicButton
